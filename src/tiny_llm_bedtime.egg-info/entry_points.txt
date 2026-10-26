@@ -1,0 +1,4 @@
+[console_scripts]
+tiny-llm-api = tiny_llm.api:main
+tiny-llm-generate = tiny_llm.generate:main
+tiny-llm-train = tiny_llm.train:main

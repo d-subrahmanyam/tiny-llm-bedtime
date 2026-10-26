@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tiny-llm-bedtime"
+version = "0.1.0"
+description = "A learning-first tiny GPT-style LLM trained on bedtime stories from Hugging Face datasets."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "torch>=2.2.0",
+  "datasets>=2.18.0",
+  "tokenizers>=0.15.0",
+  "pyyaml>=6.0.0",
+  "tqdm>=4.66.0",
+  "fastapi>=0.115.0",
+  "uvicorn>=0.30.0",
+]
+
+[project.scripts]
+tiny-llm-train = "tiny_llm.train:main"
+tiny-llm-generate = "tiny_llm.generate:main"
+tiny-llm-api = "tiny_llm.api:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

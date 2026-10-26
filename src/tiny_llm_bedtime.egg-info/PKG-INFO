@@ -1,0 +1,124 @@
+Metadata-Version: 2.4
+Name: tiny-llm-bedtime
+Version: 0.1.0
+Summary: A learning-first tiny GPT-style LLM trained on bedtime stories from Hugging Face datasets.
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: torch>=2.2.0
+Requires-Dist: datasets>=2.18.0
+Requires-Dist: tokenizers>=0.15.0
+Requires-Dist: pyyaml>=6.0.0
+Requires-Dist: tqdm>=4.66.0
+Requires-Dist: fastapi>=0.115.0
+Requires-Dist: uvicorn>=0.30.0
+
+# Tiny LLM from Bedtime Stories (Learning Project)
+
+This project teaches you how to build a **small GPT-style language model** end-to-end:
+
+1. Load text from a Hugging Face bedtime stories dataset (default: `gofilipa/bedtime_stories`).
+2. Train your own tokenizer.
+3. Train a causal Transformer language model in PyTorch.
+4. Generate stories from the trained model.
+
+If you specifically want a different bedtime dataset, change `data.dataset_name` and `data.text_field` in [default.yaml](/home/subbu/Code/try-llm/tiny-llm/configs/default.yaml).
+
+---
+
+## Quick Start
+
+### 1) Install uv (one-time)
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+### 2) Sync environment and dependencies
+
+```bash
+uv sync
+```
+
+### 3) Train
+
+```bash
+uv run tiny-llm-train --config configs/default.yaml
+```
+
+Outputs:
+- Tokenizer: `tokenizer.json`
+- Checkpoints: [checkpoints/](/home/subbu/Code/try-llm/tiny-llm/checkpoints)
+
+### 4) Generate
+
+```bash
+uv run tiny-llm-generate \
+  --config configs/default.yaml \
+  --checkpoint checkpoints/step_002000.pt \
+  --prompt "Once upon a moonlit night,"
+```
+
+### 5) Start API server
+
+```bash
+uv run tiny-llm-api \
+  --config configs/default.yaml \
+  --checkpoint checkpoints/step_002000.pt \
+  --host 127.0.0.1 \
+  --port 8000
+```
+
+In another terminal:
+
+```bash
+curl -X POST "http://127.0.0.1:8000/generate" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "prompt": "Once upon a moonlit night,",
+    "max_new_tokens": 120,
+    "temperature": 0.9,
+    "top_k": 40
+  }'
+```
+
+Open interactive API docs at `http://127.0.0.1:8000/docs`.
+
+Optional lockfile creation (useful for reproducible installs):
+
+```bash
+uv lock
+```
+
+---
+
+## Project Structure
+
+- [src/tiny_llm/train.py](/home/subbu/Code/try-llm/tiny-llm/src/tiny_llm/train.py): training pipeline
+- [src/tiny_llm/generate.py](/home/subbu/Code/try-llm/tiny-llm/src/tiny_llm/generate.py): inference script
+- [src/tiny_llm/model.py](/home/subbu/Code/try-llm/tiny-llm/src/tiny_llm/model.py): Transformer model implementation
+- [src/tiny_llm/data.py](/home/subbu/Code/try-llm/tiny-llm/src/tiny_llm/data.py): dataset + tokenizer + batching
+- [src/tiny_llm/api.py](/home/subbu/Code/try-llm/tiny-llm/src/tiny_llm/api.py): FastAPI-based inference server
+- [configs/default.yaml](/home/subbu/Code/try-llm/tiny-llm/configs/default.yaml): experiment configuration
+- [docs/](/home/subbu/Code/try-llm/tiny-llm/docs): conceptual docs and UML diagrams
+
+---
+
+## Learning Docs
+
+- [01_overview.md](/home/subbu/Code/try-llm/tiny-llm/docs/01_overview.md)
+- [02_data_and_tokenization.md](/home/subbu/Code/try-llm/tiny-llm/docs/02_data_and_tokenization.md)
+- [03_transformer_architecture.md](/home/subbu/Code/try-llm/tiny-llm/docs/03_transformer_architecture.md)
+- [04_training_loop.md](/home/subbu/Code/try-llm/tiny-llm/docs/04_training_loop.md)
+- [05_inference_and_sampling.md](/home/subbu/Code/try-llm/tiny-llm/docs/05_inference_and_sampling.md)
+- [06_scaling_and_next_steps.md](/home/subbu/Code/try-llm/tiny-llm/docs/06_scaling_and_next_steps.md)
+- [07_serving_api.md](/home/subbu/Code/try-llm/tiny-llm/docs/07_serving_api.md)
+- [uml_diagrams.md](/home/subbu/Code/try-llm/tiny-llm/docs/uml_diagrams.md)
+
+---
+
+## Notes for Further Training
+
+- Increase `data.max_samples` to train on more text.
+- Increase `model.n_layer`, `model.n_embd`, and `model.block_size` carefully.
+- Keep `val_ratio` non-zero to detect overfitting.
+- Save multiple checkpoints and compare generations.

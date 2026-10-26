@@ -1,0 +1,298 @@
+{
+  "version": "1.0",
+  "truncation": null,
+  "padding": null,
+  "added_tokens": [
+    {
+      "id": 0,
+      "content": "<|pad|>",
+      "single_word": false,
+      "lstrip": false,
+      "rstrip": false,
+      "normalized": false,
+      "special": true
+    },
+    {
+      "id": 1,
+      "content": "<|bos|>",
+      "single_word": false,
+      "lstrip": false,
+      "rstrip": false,
+      "normalized": false,
+      "special": true
+    },
+    {
+      "id": 2,
+      "content": "<|eos|>",
+      "single_word": false,
+      "lstrip": false,
+      "rstrip": false,
+      "normalized": false,
+      "special": true
+    },
+    {
+      "id": 3,
+      "content": "<|unk|>",
+      "single_word": false,
+      "lstrip": false,
+      "rstrip": false,
+      "normalized": false,
+      "special": true
+    }
+  ],
+  "normalizer": null,
+  "pre_tokenizer": {
+    "type": "ByteLevel",
+    "add_prefix_space": true,
+    "trim_offsets": true,
+    "use_regex": true
+  },
+  "post_processor": null,
+  "decoder": {
+    "type": "ByteLevel",
+    "add_prefix_space": true,
+    "trim_offsets": true,
+    "use_regex": true
+  },
+  "model": {
+    "type": "BPE",
+    "dropout": null,
+    "unk_token": "<|unk|>",
+    "continuing_subword_prefix": null,
+    "end_of_word_suffix": null,
+    "fuse_unk": false,
+    "byte_fallback": false,
+    "ignore_merges": false,
+    "vocab": {
+      "<|pad|>": 0,
+      "<|bos|>": 1,
+      "<|eos|>": 2,
+      "<|unk|>": 3,
+      ",": 4,
+      ".": 5,
+      "O": 6,
+      "T": 7,
+      "a": 8,
+      "c": 9,
+      "d": 10,
+      "e": 11,
+      "f": 12,
+      "g": 13,
+      "h": 14,
+      "i": 15,
+      "l": 16,
+      "m": 17,
+      "n": 18,
+      "o": 19,
+      "p": 20,
+      "s": 21,
+      "t": 22,
+      "u": 23,
+      "x": 24,
+      "y": 25,
+      "Ġ": 26,
+      "it": 27,
+      "le": 28,
+      "lit": 29,
+      "on": 30,
+      "Ġs": 31,
+      "On": 32,
+      "Th": 33,
+      "ce": 34,
+      "dl": 35,
+      "fo": 36,
+      "gh": 37,
+      "igh": 38,
+      "mo": 39,
+      "ndl": 40,
+      "nigh": 41,
+      "ou": 42,
+      "pt": 43,
+      "pon": 44,
+      "tle": 45,
+      "upon": 46,
+      "Ġa": 47,
+      "Ġlit": 48,
+      "ĠOn": 49,
+      "ĠTh": 50,
+      "Ġfo": 51,
+      "Ġmo": 52,
+      "Ġnigh": 53,
+      "Ġupon": 54,
+      "lept": 55,
+      "onlit": 56,
+      "Ġsou": 57,
+      "Ġslept": 58,
+      "ndly": 59,
+      "Ġlittle": 60,
+      "ĠOnce": 61,
+      "ĠThe": 62,
+      "Ġfox": 63,
+      "Ġmoonlit": 64,
+      "Ġnight": 65,
+      "Ġsoundly": 66
+    },
+    "merges": [
+      [
+        "i",
+        "t"
+      ],
+      [
+        "l",
+        "e"
+      ],
+      [
+        "l",
+        "it"
+      ],
+      [
+        "o",
+        "n"
+      ],
+      [
+        "Ġ",
+        "s"
+      ],
+      [
+        "O",
+        "n"
+      ],
+      [
+        "T",
+        "h"
+      ],
+      [
+        "c",
+        "e"
+      ],
+      [
+        "d",
+        "l"
+      ],
+      [
+        "f",
+        "o"
+      ],
+      [
+        "g",
+        "h"
+      ],
+      [
+        "i",
+        "gh"
+      ],
+      [
+        "m",
+        "o"
+      ],
+      [
+        "n",
+        "dl"
+      ],
+      [
+        "n",
+        "igh"
+      ],
+      [
+        "o",
+        "u"
+      ],
+      [
+        "p",
+        "t"
+      ],
+      [
+        "p",
+        "on"
+      ],
+      [
+        "t",
+        "le"
+      ],
+      [
+        "u",
+        "pon"
+      ],
+      [
+        "Ġ",
+        "a"
+      ],
+      [
+        "Ġ",
+        "lit"
+      ],
+      [
+        "Ġ",
+        "On"
+      ],
+      [
+        "Ġ",
+        "Th"
+      ],
+      [
+        "Ġ",
+        "fo"
+      ],
+      [
+        "Ġ",
+        "mo"
+      ],
+      [
+        "Ġ",
+        "nigh"
+      ],
+      [
+        "Ġ",
+        "upon"
+      ],
+      [
+        "le",
+        "pt"
+      ],
+      [
+        "on",
+        "lit"
+      ],
+      [
+        "Ġs",
+        "ou"
+      ],
+      [
+        "Ġs",
+        "lept"
+      ],
+      [
+        "ndl",
+        "y"
+      ],
+      [
+        "Ġlit",
+        "tle"
+      ],
+      [
+        "ĠOn",
+        "ce"
+      ],
+      [
+        "ĠTh",
+        "e"
+      ],
+      [
+        "Ġfo",
+        "x"
+      ],
+      [
+        "Ġmo",
+        "onlit"
+      ],
+      [
+        "Ġnigh",
+        "t"
+      ],
+      [
+        "Ġsou",
+        "ndly"
+      ]
+    ]
+  }
+}
