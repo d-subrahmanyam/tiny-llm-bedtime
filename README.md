@@ -75,6 +75,32 @@ curl -X POST "http://127.0.0.1:8000/generate" \
 
 Interactive docs: `http://127.0.0.1:8000/docs`
 
+## Download model from GitHub Releases
+
+Release: `v0.1.0`  
+URL: `https://github.com/d-subrahmanyam/tiny-llm-bedtime/releases/tag/v0.1.0`
+
+### Option A: with GitHub CLI
+
+```bash
+gh release download v0.1.0 \
+  -R d-subrahmanyam/tiny-llm-bedtime \
+  -p "step_005000.pt" \
+  -p "tokenizer.json" \
+  -D .
+mkdir -p checkpoints
+mv step_005000.pt checkpoints/step_005000.pt
+```
+
+### Option B: with curl
+
+```bash
+curl -L -o checkpoints/step_005000.pt \
+  https://github.com/d-subrahmanyam/tiny-llm-bedtime/releases/download/v0.1.0/step_005000.pt
+curl -L -o tokenizer.json \
+  https://github.com/d-subrahmanyam/tiny-llm-bedtime/releases/download/v0.1.0/tokenizer.json
+```
+
 ## Config
 
 Main config: [`configs/default.yaml`](./configs/default.yaml)
