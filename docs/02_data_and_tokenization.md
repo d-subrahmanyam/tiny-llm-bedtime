@@ -36,3 +36,18 @@ Byte-Pair Encoding starts from small units and merges frequent pairs. Benefits:
 
 `<|eos|>` is appended between stories so the model learns boundaries.
 
+## Config chosen in this project (and why)
+
+From [configs/default.yaml](/home/subbu/Code/try-llm/tiny-llm/configs/default.yaml):
+
+- `vocab_size: 4096`
+- `min_frequency: 2`
+- tokenizer implementation: byte-level BPE (`ByteLevel` pre-tokenizer + decoder)
+- special tokens: `<|pad|>`, `<|bos|>`, `<|eos|>`, `<|unk|>`
+
+Rationale:
+
+- `4096` keeps embedding/output layers compact for a tiny model while still giving enough subword coverage for bedtime vocabulary.
+- `min_frequency=2` prevents single-occurrence artifacts from occupying vocabulary slots.
+- Byte-level preprocessing avoids hard failures on rare characters and punctuation.
+- Explicit BOS/EOS markers make sequence boundaries visible to the model.
